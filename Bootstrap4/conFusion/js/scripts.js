@@ -14,6 +14,5 @@ $(document).ready(function(){
   });
 });
 function testFunction(modalRef) {
-  console.log("TEST");
   $(modalRef).modal('toggle');
 };
