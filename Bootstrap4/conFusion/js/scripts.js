@@ -13,6 +13,6 @@ $(document).ready(function(){
       }
   });
 });
-function testFunction(modalRef) {
+function toggleModal(modalRef) {
   $(modalRef).modal('toggle');
 };
