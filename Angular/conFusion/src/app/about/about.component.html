@@ -1,3 +1,18 @@
-<p>
-  about works!
-</p>
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+
+<md-list fxFlex>
+  <md-list-item *ngFor="let leader of leaders">
+    <img md-list-avatar src={{leader.image}} alt={{leader.name}}>
+    <h1 md-line> {{leader.name}} </h1>
+    <p md-line>
+      <span> {{leader.designation}} </span>
+    </p>
+    <p md-line>
+      <span> {{leader.description}} </span>
+    </p>
+  </md-list-item>
+</md-list>
+
+</div>
