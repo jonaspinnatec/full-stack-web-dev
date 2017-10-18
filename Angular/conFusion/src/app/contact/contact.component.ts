@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Feedback, ContactType } from '../shared/feedback';
-import { flyInOut } from '../animations/app.animation';
+import { FeedbackService } from '../services/feedback.service';
+import { flyInOut, expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-contact',
@@ -12,13 +13,17 @@ import { flyInOut } from '../animations/app.animation';
     'style': 'display: block;'
   },
   animations: [
-    flyInOut()
+    flyInOut(),
+    expand()
   ]
 })
 export class ContactComponent implements OnInit {
 
   feedbackForm: FormGroup;
   feedback: Feedback;
+  errMess: string;
+  submitting: boolean = false;
+  showingFeedback: boolean = false;
   contactType = ContactType;
   formErrors = {
     'firstname': '',
@@ -48,7 +53,7 @@ export class ContactComponent implements OnInit {
     },
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private feedbackService: FeedbackService) {
     this.createForm();
   }
 
@@ -70,8 +75,11 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.feedback = this.feedbackForm.value;
-    console.log(this.feedback);
+    this.submitting = true;
+    this.feedbackService.submitFeedback(this.feedbackForm.value).subscribe(
+      feedback => this.handleFeedbackConfirmation(feedback),
+      errmess => this.handleFeedbackError(errmess)
+    );
     this.feedbackForm.reset({
       firstname: '',
       lastname: '',
@@ -97,6 +105,22 @@ export class ContactComponent implements OnInit {
         }
       }
     }
+  }
+
+  handleFeedbackConfirmation(feedback: Feedback) {
+    this.feedback = feedback;
+    this.submitting = false;
+    console.log(this.feedback);
+    this.showingFeedback = true;
+    setTimeout(()=>{
+      this.showingFeedback = false;
+    },5000);
+  }
+
+  handleFeedbackError(errmess) {
+    this.submitting = false;
+    this.showingFeedback = false;
+    this.errMess = <any>errmess;
   }
 
 }

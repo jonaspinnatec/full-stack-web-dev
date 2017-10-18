@@ -18,7 +18,7 @@ export class DishService {
   }
 
   getDish(id: number): Observable<Dish> {
-    return  this.restangular.one('dishes',id).get();
+    return this.restangular.one('dishes',id).get();
   }
 
   getFeaturedDish(): Observable<Dish> {
