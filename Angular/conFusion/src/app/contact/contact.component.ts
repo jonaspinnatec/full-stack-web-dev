@@ -118,9 +118,12 @@ export class ContactComponent implements OnInit {
   }
 
   handleFeedbackError(errmess) {
-    this.submitting = false;
-    this.showingFeedback = false;
     this.errMess = <any>errmess;
+    setTimeout(()=>{
+      this.submitting = false;
+      this.showingFeedback = false;
+      this.errMess = undefined;
+    },5000);
   }
 
 }
