@@ -1,0 +1,2 @@
+ionic serve --lab
+http://localhost:8100/ionic-lab
