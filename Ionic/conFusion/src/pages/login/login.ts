@@ -59,10 +59,11 @@ export class LoginPage {
     this.user.username = this.loginForm.get('username').value;
     this.user.password = this.loginForm.get('password').value;
     console.log(this.user);
-    if(this.loginForm.get('remember').value)
+    if(this.loginForm.get('remember').value) {
       this.storage.set('user', this.user)
-    else
+    } else {
       this.storage.remove('user');
+    }  
     this.viewCtrl.dismiss();
   }
 }
