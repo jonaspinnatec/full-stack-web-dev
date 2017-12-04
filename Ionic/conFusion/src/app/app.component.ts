@@ -28,6 +28,8 @@ export class MyApp {
     private loadingCtrl: LoadingController,
     private network: Network) {
 
+    this.initializeApp();
+
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', icon: 'home', component: HomePage },
