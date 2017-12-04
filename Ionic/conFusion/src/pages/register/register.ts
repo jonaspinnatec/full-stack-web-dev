@@ -56,7 +56,7 @@ export class RegisterPage {
       mediaType: this.camera.MediaType.PICTURE,
       cameraDirection: this.camera.Direction.FRONT
     }
-
+    
     this.camera.getPicture(options).then((imageData) => {
 
       this.image = imageData;
