@@ -1,4 +1,5 @@
 ionic serve --lab
 http://localhost:8100/ionic-lab
 json-server --watch db.json -d 2000
+ionic cordova build android
 ionic cordova emulate android
