@@ -2,3 +2,4 @@ tns run android --emulator
 
 tns run android
 https://stackoverflow.com/questions/41267005/failed-to-crunch-file-android-studio-appmergedebugresources
+json-server --watch db.json -d 2000
