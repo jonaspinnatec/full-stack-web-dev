@@ -1,0 +1,16 @@
+<StackLayout class="modal-view-style" [formGroup]="commentForm">
+    <GridLayout rows="auto, auto, auto, auto" columns="auto, *">
+      <Label class="h3 m-15" row="0" col="0" text="Your Name" textWrap="true"></Label>
+      <TextField class="input input-border" id="textFieldAuthor"
+          hint="Your Name" [text]=''
+          row="0" col="1" formControlName="author"></TextField>
+      <Label class="h3 m-15" row="1" col="0" text="Rating" textWrap="true"></Label>
+      <Slider row="1" col="1" formControlName="rating" minValue="1" maxValue="5" id="sliderRating"></Slider>
+      <Label class="h3 m-15" row="2" col="0" text="Your Comments" textWrap="true"></Label>
+      <TextField class="input input-border" id="textFieldComment"
+          hint="Comment" [text]=''
+          row="2" col="1" formControlName="comment"></TextField>
+      <Button class="btn btn-primary btn-active" text="submit" row="3" col="0"
+          (tap)="submit()"></Button>
+    </GridLayout>
+</StackLayout>
