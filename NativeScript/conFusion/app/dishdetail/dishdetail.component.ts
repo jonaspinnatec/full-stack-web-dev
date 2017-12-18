@@ -7,6 +7,7 @@ import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 import { Toasty } from 'nativescript-toasty'
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
+import { action } from "ui/dialogs";
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -43,7 +44,8 @@ export class DishdetailComponent implements OnInit {
           this.dish.comments.forEach(comment => total += comment.rating);
           this.avgstars = (total/this.numcomments).toFixed(2);
         },
-        errmess => { this.dish = null; this.errMess = <any>errmess; });
+        errmess => { this.dish = null; this.errMess = <any>errmess; }
+      );
   }
 
   goBack(): void {
@@ -57,5 +59,25 @@ export class DishdetailComponent implements OnInit {
       const toast = new Toasty("Added Dish "+ this.dish.id, "short", "bottom");
       toast.show();
     }
+  }
+
+  openActionItemDialog() {
+    let options = {
+      title: "Actions",
+      message: "Choose an action",
+      cancelButtonText: "Cancel",
+      actions: ["Add to Favorites", "Add Comment"]
+    };
+
+    action(options).then((result: string) => {
+        if (result === "Add to Favorites") {
+            console.log('Action: add to favorites');
+            this.addToFavorites();
+        } else if (result === "Add Comment") {
+            console.log('Action: add comment');
+        } else {
+            console.log('Action cancelled');
+        }
+    });
   }
 }
