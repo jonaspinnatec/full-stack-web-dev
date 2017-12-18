@@ -4,7 +4,7 @@ import { Comment } from '../shared/comment';
 import { DishService } from '../services/dish.service';
 import { FavoriteService } from '../services/favorite.service';
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';
-import {Toasty} from 'nativescript-toasty'
+import { Toasty } from 'nativescript-toasty'
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 import 'rxjs/add/operator/switchMap';
