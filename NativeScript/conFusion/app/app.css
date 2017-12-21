@@ -52,3 +52,8 @@ refer to http://docs.nativescript.org/ui/theme.
 .fa {
   font-family: FontAwesome, fontawesome-webfont;
 }
+
+.reservation-summyry-view {
+  opacity: 0;
+  transform: scale(0);
+}
