@@ -35,13 +35,15 @@ export class CommentComponent implements OnInit {
 
     public submit() {
       if (this.commentForm.valid) {
-        let slider: Slider = <Slider>this.page.getViewById<Slider>('sliderRating');
-        this.rating = slider.value;
-        let authorTextField: TextField = <TextField>this.page.getViewById<TextField>('textFieldAuthor');
-        this.author = authorTextField.text;
-        let commentTextField: TextField = <TextField>this.page.getViewById<TextField>('textFieldComment');
-        this.commentText = commentTextField.text;
-        this.comment = {rating: this.rating, comment: this.commentText, author: this.author, date: (new Date()).toISOString()};
+        this.comment = this.commentForm.value;
+        this.comment.date = (new Date()).toISOString();
+        // let slider: Slider = <Slider>this.page.getViewById<Slider>('sliderRating');
+        // this.rating = slider.value;
+        // let authorTextField: TextField = <TextField>this.page.getViewById<TextField>('textFieldAuthor');
+        // this.author = authorTextField.text;
+        // let commentTextField: TextField = <TextField>this.page.getViewById<TextField>('textFieldComment');
+        // this.commentText = commentTextField.text;
+        // this.comment = {rating: this.rating, comment: this.commentText, author: this.author, date: (new Date()).toISOString()};
         this.params.closeCallback(this.comment);
       }
     }
