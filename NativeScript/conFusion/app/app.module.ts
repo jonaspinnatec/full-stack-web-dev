@@ -1,8 +1,8 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
-import { NativeScriptUISideDrawerModule } from "nativescript-telerik-ui/sidedrawer/angular";
-import { NativeScriptUIListViewModule } from "nativescript-telerik-ui/listview/angular";
+import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
+import { NativeScriptUIListViewModule } from "nativescript-pro-ui/listview/angular";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from "./app.routing";

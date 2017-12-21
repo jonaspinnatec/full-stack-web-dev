@@ -37,8 +37,8 @@ export class ContactComponent extends DrawerPage implements OnInit {
       })
   }
 
-  call() {
-    TNSPhone.dial('852-1234-5678', true);
+  callRestaurant() {
+    TNSPhone.dial('+852-1234-5678', true);
   }
 
 }
