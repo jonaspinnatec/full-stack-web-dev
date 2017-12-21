@@ -53,7 +53,7 @@ refer to http://docs.nativescript.org/ui/theme.
   font-family: FontAwesome, fontawesome-webfont;
 }
 
-.reservation-summyry-view {
+.reservation-summary-view {
   opacity: 0;
   transform: scale(0);
 }

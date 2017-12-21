@@ -28,7 +28,7 @@
               <Button class="btn btn-primary btn-active m-15" row="3" col="0"
                   text="Submit" (tap)="onSubmit()"></Button>
           </GridLayout>
-          <GridLayout id="summaryView" class="m-5 reservation-summyry-view" rows="auto auto auto" columns="auto, auto"
+          <GridLayout id="summaryView" class="m-5 reservation-summary-view" rows="auto auto auto" columns="auto, auto"
             [visibility]="showForm ? 'collapsed' : 'visible'">
               <Label class="h3 m-15" row="0" col="0" text="No. of Guests" textWrap="true"></Label>
               <Label class="h3 m-15" row="0" col="1" [text]="sumbittedReservation.guests" textWrap="true"></Label>

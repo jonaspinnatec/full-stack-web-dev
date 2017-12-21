@@ -5,6 +5,7 @@ import { Switch } from 'ui/switch';
 import { Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 import { ReservationModalComponent } from "../reservationmodal/reservationmodal.component";
+import { CouchbaseService } from '../services/couchbase.service';
 import { Page } from "ui/page";
 import { View } from "ui/core/view";
 
@@ -20,12 +21,15 @@ export class ReservationComponent extends DrawerPage implements OnInit {
     summaryView: View;
     showForm: boolean = true;
     sumbittedReservation = {guests: '', smoking: '', dateTime: ''};
+    docId: string = "reservations";
+    reservations: Array<any>;
 
     constructor(private changeDetectorRef: ChangeDetectorRef,
         private formBuilder: FormBuilder,
         private modalService: ModalDialogService,
         private vcRef: ViewContainerRef,
-        private page: Page) {
+        private page: Page,
+        private couchbaseService: CouchbaseService) {
             super(changeDetectorRef);
             this.reservation = this.formBuilder.group({
                 guests: 3,
@@ -78,6 +82,7 @@ export class ReservationComponent extends DrawerPage implements OnInit {
     onSubmit() {
         this.sumbittedReservation = this.reservation.value;
         console.log(JSON.stringify(this.sumbittedReservation));
+        this.save();
         this.animate();
     }
 
@@ -97,5 +102,21 @@ export class ReservationComponent extends DrawerPage implements OnInit {
             scale: { x: 1, y: 1}
           })
       })
+    }
+
+    save() {
+      let doc = this.couchbaseService.getDocument(this.docId);
+      if( doc == null) {
+        console.log("This is the first reservation");
+        this.reservations = [];
+        this.couchbaseService.createDocument({"reservations": this.reservations}, this.docId);
+      } else {
+        this.reservations = doc.reservations;
+        console.log(JSON.stringify(doc));
+      }
+      this.reservations.push(this.sumbittedReservation);
+      this.couchbaseService.updateDocument(this.docId, {"reservations": this.reservations});
+      let updatedDoc = this.couchbaseService.getDocument(this.docId);
+      console.log(JSON.stringify(updatedDoc));
     }
 }
