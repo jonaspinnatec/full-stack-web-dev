@@ -25,6 +25,15 @@ connect.then((db) => {
           })
           .exec();
     })
+    .then((dish) => {
+        console.log(dish);
+        dish.comments.push({
+            rating: 5,
+            comment: 'I\'m getting a sinking feeling!',
+            author: 'Leonardo di Carpaccio'
+        });
+        return dish.save();
+    })
     .then((dishes) => {
         console.log(dishes);
         return db.collection('dishes').drop();
