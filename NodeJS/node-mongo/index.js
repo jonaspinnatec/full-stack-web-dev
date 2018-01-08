@@ -2,8 +2,10 @@ const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 const dboper = require('./operations');
 
+// const url = 'mongodb://localhost:27017/conFusion';
 const url = 'mongodb://localhost:27017/';
 
+// MongoClient.connect(url, (err, db) => {
 MongoClient.connect(url, (err, client) => {
     assert.equal(err,null);
     console.log('Connected correctly to server');
@@ -47,6 +49,7 @@ MongoClient.connect(url, (err, client) => {
                             db.dropCollection("dishes", (result) => {
                                 console.log("Dropped Collection: ", result);
 
+                                // db.close();
                                 client.close();
                             });
                         });
