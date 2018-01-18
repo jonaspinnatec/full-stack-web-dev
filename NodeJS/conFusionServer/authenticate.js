@@ -37,7 +37,7 @@ exports.jwtPassport = passport.use(new JwtStrategy(opts,
 
 exports.verifyUser = passport.authenticate('jwt', {session: false});
 
-exports.verifyAdmin = function ensureAuthenticated(req, res, next) {
+exports.verifyAdmin = function(req, res, next) {
   if (req.user.admin) {
     console.log("Admin verified");
     next();
