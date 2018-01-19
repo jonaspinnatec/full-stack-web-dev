@@ -12,7 +12,7 @@ favoritesRouter.route('/')
 .options(cors.corsWithOptions, (req, res) => { res.sendStatus(200); })
 .get(cors.cors, authenticate.verifyUser, (req,res,next) => {
     console.log('Returning Favorites for User: ' + req.user._id);
-    Favorites.find({ 'user': req.user._id })
+    Favorites.findOne({ 'user': req.user._id })
     .populate('user')
     .populate('dishes')
     .then((favorites) => {
@@ -23,12 +23,39 @@ favoritesRouter.route('/')
     .catch((err) => next(err));
 })
 .post(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
-    Favorites.create(req.body)
-    .then((favorite) => {
-        console.log('Favorite Created ', favorite);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(favorite);
+    // Favorites.create(req.body)
+    console.log('Posting Favorites for User: ' + req.user._id);
+    Favorites.findOne({ 'user': req.user._id })
+    .then((favorites) => {
+        var array = req.body;
+        if (!favorites) {
+          Favorites.create({ "user": req.user._id, 'dishes': [] })
+          .then((createdFavorites) => {
+              for (var i in array) {
+                console.log("ADDING " + array[i]._id);
+                createdFavorites.dishes.push(array[i]._id);
+              }
+              createdFavorites.save()
+              .then((savedFavorites) => {
+                  res.statusCode = 200;
+                  res.setHeader('Content-Type', 'application/json');
+                  res.json(savedFavorites);
+              }, (err) => next(err));
+          });
+        } else {
+          for (var i in array) {
+            if (favorites.dishes.indexOf(array[i]._id) < 0) {
+              console.log("ADDING " + array[i]._id);
+              favorites.dishes.push(array[i]._id);
+            }
+          }
+          favorites.save()
+          .then((savedFavorites) => {
+              res.statusCode = 200;
+              res.setHeader('Content-Type', 'application/json');
+              res.json(savedFavorites);
+          }, (err) => next(err));
+        }
     }, (err) => next(err))
     .catch((err) => next(err));
 })
